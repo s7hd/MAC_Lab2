@@ -1,0 +1,13 @@
+    # Test if x5 is even or odd
+    task3.1:
+    .text
+    
+    li x5 7
+    andi x10, x5, 1      # x10 = x5 & 1 (check LSB)
+    
+    ecall
+    #I used another reg to test the even case
+    li x4 8
+   andi x11 x4 ,1
+   ecall
+    # If LSB is 0, it's even; otherwise, it's odd.

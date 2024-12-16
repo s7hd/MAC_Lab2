@@ -1,0 +1,28 @@
+# Input:
+# x5: First signed integer
+# x6: Second signed integer
+
+# Output:
+# x10: 1 if x5 > x6 (signed comparison), 0 otherwise
+.text
+task3.6:
+
+    #  Subtract x6 from x5
+    sub t0, x5, x6        # t0 = x5 - x6 (signed subtraction)
+
+    #  Extract the sign bit of t0
+    srli t1, t0, 31       # t1 = t0 >> 31 (extract MSB: 1 if negative, 0 if positive)
+
+    #  Invert the sign bit
+    xori t1, t1, 1        # t1 = 1 if t0 >= 0, 0 if t0 < 0
+
+    # Check for equality (x5 == x6)
+    xor t2, x5, x6        # t2 = x5 ^ x6 (result is 0 if x5 == x6, non-zero otherwise)
+    srli t2, t2, 31       # Shift t2 right to check if t2 != 0
+    xori t2, t2, 1        # t2 = 1 if x5 == x6, 0 otherwise
+
+    # Combine results
+    and x10, t1, t2       # x10 = t1 & t2 (x5 > x6 and x5 != x6)
+
+    
+    ecall

@@ -1,0 +1,5 @@
+.text
+task3.4:
+    slli    x6, x6, 3        # Multiply the byte index (x6) by 8 to calculate the byte shift.
+    srl    x10, x5, x6      # Shift the value in x5 right by the number of bytes (x6) to get the desired byte in the LSB.
+    andi    x10, x10, 0xFF   # Mask out the upper 24 bits, keeping only the desired byte.
